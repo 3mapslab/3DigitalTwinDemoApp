@@ -1,5 +1,5 @@
-# 3digitaltwindemoapp
-
+# DigitalTwinDemoApp
+A simple demo for @triedeti/3DigitalTwin
 ## Project setup
 ```
 npm install
