@@ -1,27 +1,32 @@
 <template>
-  <div id="app">
-    <World />
-  </div>
+  <v-app>
+    <v-main>
+      <World />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import World from "./components/World.vue";
+import World from "./components/World";
 
 export default {
   name: "App",
+
   components: {
     World,
   },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
 </style>
