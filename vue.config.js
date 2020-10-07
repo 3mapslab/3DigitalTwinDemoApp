@@ -6,5 +6,5 @@ module.exports = {
     if (process.env.NODE_ENV === 'development') {
       config.resolve.alias.set('@triedeti/threedigitaltwin', '@triedeti/threedigitaltwin-dev');
     }
-  }
+  },
 }
