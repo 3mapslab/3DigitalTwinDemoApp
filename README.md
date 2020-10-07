@@ -1,7 +1,11 @@
 # DigitalTwinDemoApp
-A simple demo for @triedeti/3DigitalTwin
+A simple sandbox using @triedeti/3DigitalTwin
+
 ## Project setup
 ```
+git clone https://github.com/triedeti/3DigitalTwin.git
+git clone https://github.com/triedeti/3DigitalTwinDemoApp.git
+cd 3DigitalTwinDemoApp
 npm install
 ```
 
@@ -19,6 +23,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
