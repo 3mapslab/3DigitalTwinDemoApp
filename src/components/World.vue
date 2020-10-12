@@ -47,66 +47,64 @@ const roadsProperties = {
   },
 };
 
+var demoData = [
+  {
+    url: "https://triedeti.pt/data_geojson/terrain.geo.json",
+    props: terrainProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/buildings.geo.json",
+    props: buildingsProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/roads.geo.json",
+    props: roadsProperties,
+  },
+];
+
 export default {
   name: "World",
+  data: function () {
+    return {
+      threedigitaltwin: null,
+    };
+  },
+  methods: {
+    loadDemoData() {
+      var that = this;
+
+      demoData.forEach((demo) => {
+        fetch(demo.url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            that.threedigitaltwin.loadLayer(null, data, demo.props);
+          })
+          .catch((err) => {
+            // Do something for an error here
+            console.log("Fetch Error", err);
+          });
+      });
+    },
+  },
   mounted() {
+    var that = this;
+
     //Init 3DigitalTwin
-    var threedigitaltwin = new ThreeDigitalTwin();
+    that.threedigitaltwin = new ThreeDigitalTwin();
     var canvas = document.getElementById("world");
-    threedigitaltwin.init(canvas, true);
+    that.threedigitaltwin.init(canvas, true);
 
     //Enable Ocean
-    threedigitaltwin.on("oceanLoaded", () => {
+    that.threedigitaltwin.on("oceanLoaded", () => {
       //Enable Ocean
-      threedigitaltwin.toggleOcean(true);
+      that.threedigitaltwin.toggleOcean(true);
+
+      that.loadDemoData();
+
+      //that.threedigitaltwin.toggle3DTile(true);
     });
-
-    //Load and Enable Terrain
-    fetch("http://triedeti.pt/data_geojson/terrain.geojson", { mode: 'no-cors', })
-      .then(function (response) {
-        if (response.status !== 200) {
-          return;
-        }
-
-        response.json().then(function (data) {
-          threedigitaltwin.loadLayer(null, data, terrainProperties);
-        });
-      })
-      .catch(function (err) {
-        console.log("Fetch Error", err);
-      });
-
-    //Load and Enable Building
-    fetch("http://triedeti.pt/data_geojson/buildings.geojson", { mode: 'no-cors', })
-      .then(function (response) {
-        if (response.status !== 200) {
-          return;
-        }
-
-        response.json().then(function (data) {
-          threedigitaltwin.loadLayer(null, data, buildingsProperties);
-        });
-      })
-      .catch(function (err) {
-        console.log("Fetch Error", err);
-      });
-
-    //Load and Enable Building
-    fetch("http://triedeti.pt/data_geojson/roads.geojson", { mode: 'no-cors', })
-      .then(function (response) {
-        if (response.status !== 200) {
-          return;
-        }
-
-        response.json().then(function (data) {
-          threedigitaltwin.loadLayer(null, data, roadsProperties);
-        });
-      })
-      .catch(function (err) {
-        console.log("Fetch Error", err);
-      });
-
-    //threedigitaltwin.toggle3DTile(true);
   },
 };
 </script>
