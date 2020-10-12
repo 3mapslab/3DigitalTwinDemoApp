@@ -62,7 +62,7 @@ export default {
     });
 
     //Load and Enable Terrain
-    fetch("http://triedeti.pt/data_geojson/terrain.geojson")
+    fetch("http://triedeti.pt/data_geojson/terrain.geojson", { mode: 'no-cors', })
       .then(function (response) {
         if (response.status !== 200) {
           return;
@@ -77,7 +77,7 @@ export default {
       });
 
     //Load and Enable Building
-    fetch("http://triedeti.pt/data_geojson/buildings.geojson")
+    fetch("http://triedeti.pt/data_geojson/buildings.geojson", { mode: 'no-cors', })
       .then(function (response) {
         if (response.status !== 200) {
           return;
@@ -92,7 +92,7 @@ export default {
       });
 
     //Load and Enable Building
-    fetch("http://triedeti.pt/data_geojson/roads.geojson")
+    fetch("http://triedeti.pt/data_geojson/roads.geojson", { mode: 'no-cors', })
       .then(function (response) {
         if (response.status !== 200) {
           return;
@@ -106,7 +106,7 @@ export default {
         console.log("Fetch Error", err);
       });
 
-    threedigitaltwin.toggle3DTile(true);
+    //threedigitaltwin.toggle3DTile(true);
   },
 };
 </script>
