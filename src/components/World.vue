@@ -141,6 +141,7 @@ export default {
           })
           .then((data) => {
             that.threedigitaltwin.loadLayer(null, data, demo.props);
+            that.threedigitaltwin._loadModel("ponte_leca.gltf",[-74.0066, 40.7135]);
           })
           .catch((err) => {
             // Do something for an error here
@@ -151,7 +152,6 @@ export default {
   },
   mounted() {
     var that = this;
-
     //Init 3DigitalTwin
     that.threedigitaltwin = new ThreeDigitalTwin(configs);
     var canvas = document.getElementById(configs.containerId);
@@ -161,9 +161,7 @@ export default {
     that.threedigitaltwin.on("oceanLoaded", () => {
       //Enable Ocean
       that.threedigitaltwin.toggleOcean(true);
-
       that.loadDemoData();
-
       //that.threedigitaltwin.toggle3DTile(true);
       //that.threedigitaltwin._loadModel('models/ponte_leca.gltf', [-8.6942530416699988, 41.18882222465502]);
       that.threedigitaltwin._loadKMZModel('models/ponte_leca.kmz', [-8.6942530416699988, 41.18882222465502]);
