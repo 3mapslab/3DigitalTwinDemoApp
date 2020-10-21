@@ -11,6 +11,35 @@
 <script>
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 
+const configs = {
+  containerId: 'world', //canvas id,
+  width: 15000, // meters
+  height: 15000, // meters
+  zoom: {
+    start: 1000,
+    min: 10,
+    max: 1000
+  },
+  center: {
+    lng: -8.7016652234108349,
+    lat: 41.185523935676713
+  },
+  pitchAngle: { 
+    start: 0, // radians
+    min: 0,
+    max: Math.PI
+  },
+  bearingAngle: {
+    start: 0, // radians
+    min: 0,
+    max: Math.PI / 2
+  },
+  oceanVisible: true, // boolean,
+  axisHelper: false, // boolean,
+  providerMapTile: null,
+  modeMapTile: null,
+}
+
 const terrainProperties = {
   depth: 1,
   altitude: 2,
@@ -37,9 +66,33 @@ const buildingsProperties = {
 
 const roadsProperties = {
   depth: 0.01,
-  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     color: "#000000",
+    opacity: 0.2,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -2,
+  },
+};
+
+const gardensProperties = {
+  depth: 0.01,
+  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
+  material: {
+    color: "#228B22",
+    opacity: 0.2,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -2,
+  },
+};
+
+const parksProperties = {
+  depth: 0.01,
+  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
+  material: {
+    color: "#696969",
     opacity: 0.2,
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -59,6 +112,14 @@ var demoData = [
   {
     url: "https://triedeti.pt/data_geojson/roads.geo.json",
     props: roadsProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/gardens.geo.json",
+    props: gardensProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/parks.geo.json",
+    props: parksProperties,
   },
 ];
 
@@ -80,6 +141,7 @@ export default {
           })
           .then((data) => {
             that.threedigitaltwin.loadLayer(null, data, demo.props);
+            that.threedigitaltwin._loadModel("ponte_leca.gltf",[-74.0066, 40.7135]);
           })
           .catch((err) => {
             // Do something for an error here
@@ -90,20 +152,18 @@ export default {
   },
   mounted() {
     var that = this;
-
     //Init 3DigitalTwin
-    that.threedigitaltwin = new ThreeDigitalTwin();
-    var canvas = document.getElementById("world");
-    that.threedigitaltwin.init(canvas, true);
-
+    that.threedigitaltwin = new ThreeDigitalTwin(configs);
+    var canvas = document.getElementById(configs.containerId);
+    that.threedigitaltwin.init(canvas, configs.axisHelper);
     //Enable Ocean
     that.threedigitaltwin.on("oceanLoaded", () => {
       //Enable Ocean
       that.threedigitaltwin.toggleOcean(true);
-
       that.loadDemoData();
-
       //that.threedigitaltwin.toggle3DTile(true);
+      that.threedigitaltwin.loadModel('models/ponte_leca.gltf', [-8.6942530416699988, 41.18882222465502]);
+      //that.threedigitaltwin._loadKMZModel('models/ponte_leca.kmz', [-8.6942530416699988, 41.18882222465502]);
     });
   },
 };
