@@ -10,6 +10,7 @@
   "dependencies": {
     "@triedeti/threedigitaltwin": "^1.0.9",
     "core-js": "^3.6.5",
+    "stats.js": "^0.17.0",
     "vue": "^2.6.11",
     "vuetify": "^2.2.11"
   },

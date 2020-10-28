@@ -10,6 +10,8 @@
 
 <script>
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
+import Stats from 'stats.js';
+
 
 const configs = {
   containerId: 'world', //canvas id,
@@ -100,6 +102,23 @@ const parksProperties = {
   },
 };
 
+var stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
+function animate() {
+
+    stats.begin();
+
+    // monitored code goes here
+    stats.end();
+
+    requestAnimationFrame( animate );
+
+}
+
+requestAnimationFrame( animate );
+
 var demoData = [
   {
     url: "https://triedeti.pt/data_geojson/terrain.geo.json",
@@ -150,7 +169,10 @@ export default {
     },
   },
   mounted() {
+
     var that = this;
+
+    
     //Init 3DigitalTwin
     that.threedigitaltwin = new ThreeDigitalTwin(configs);
     var canvas = document.getElementById(configs.containerId);
@@ -167,8 +189,10 @@ export default {
       that.threedigitaltwin._loadModel('models/ponte_leca.kmz', [-8.6942530416699988, 41.18882222465502]);
       that.threedigitaltwin._loadModel('models/Titan.kmz', [-8.71081747271464, 41.18437848352964]);
       that.threedigitaltwin._loadModel('models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae', [-8.702219, 41.187600])
-      that.threedigitaltwin._AUXloadModel('models/bollard_obj/source/WharfRoadRM.obj', [-8.697230, 41.183699]); 
+      that.threedigitaltwin._loadModel('models/bollard_obj/source/WharfRoadRM.obj', [-8.711156, 41.184164], {x:3*Math.PI/2, y:0, z:0}, 10, -11);
+
     });
   },
+
 };
 </script>
