@@ -168,7 +168,7 @@ export default {
       });
     },
   },
-  mounted() {
+  async mounted() {
 
     var that = this;
 
@@ -192,6 +192,23 @@ export default {
       that.threedigitaltwin._loadModel('models/bollard_obj/source/WharfRoadRM.obj', [-8.711156, 41.184164], {x:3*Math.PI/2, y:0, z:0}, 10, -11);
 
     });
+
+    // Load all Mooring Bits
+    var request_url = "https://triedeti.pt/data_geojson/mooring_bitt.geo.json";
+    await fetch(request_url)
+      .then(res => res.json())
+      .then((out) => { // OK, add object to data
+        for(let i=1; i<392; i=i+5) {
+          let leftC = out.features[i].geometry.coordinates[0];
+          let rightC = out.features[i].geometry.coordinates[1];
+          that.threedigitaltwin._loadModel('models/bollard_obj/source/WharfRoadRM.obj', [leftC, rightC], {x:3*Math.PI/2, y:0, z:0}, 6, -11);
+          console.log(i);
+          // console.log(leftC + " " + rightC);
+        }
+      })
+      .catch(err => { // ERR, remove day from listDate because it has no value
+        console.log(err);      
+      });
   },
 
 };
