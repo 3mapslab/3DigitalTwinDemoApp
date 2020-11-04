@@ -70,7 +70,8 @@ const roadsProperties = {
   depth: 0.01,
   altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    color: "#000000",
+    //color: "#000000",
+    texture: 'textures/road3.jpg',
     opacity: 0.2,
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -102,22 +103,7 @@ const parksProperties = {
   },
 };
 
-var stats = new Stats();
-stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom );
-
-function animate() {
-
-    stats.begin();
-
-    // monitored code goes here
-    stats.end();
-
-    requestAnimationFrame( animate );
-
-}
-
-requestAnimationFrame( animate );
+const stats = new Stats();
 
 var demoData = [
   {
@@ -167,10 +153,19 @@ export default {
           });
       });
     },
+    animateStats() {
+      stats.begin();
+      stats.end();
+      requestAnimationFrame( this.animateStats );
+    },
   },
   mounted() {
 
     var that = this;
+
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild( stats.dom );
+    requestAnimationFrame(that.animateStats)
 
     
     //Init 3DigitalTwin
