@@ -192,10 +192,10 @@ export default {
     await fetch(request_url)
       .then(res => res.json())
       .then((out) => { // OK, add object to data
-        for(let i=1; i<392; i=i+5) {
+        for(let i=1; i<392; i++) {
           let leftC = out.features[i].geometry.coordinates[0];
           let rightC = out.features[i].geometry.coordinates[1];
-          that.threedigitaltwin._loadModel('models/bollard_obj/source/WharfRoadRM.obj', [leftC, rightC], {x:3*Math.PI/2, y:0, z:0}, 6, -7);
+          that.threedigitaltwin._loadModel('models/mooringbit.dae', [leftC, rightC], undefined, 0.15, 3);
           console.log(i);
           // console.log(leftC + " " + rightC);
         }
