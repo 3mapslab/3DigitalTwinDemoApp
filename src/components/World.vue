@@ -195,7 +195,7 @@ export default {
         for(let i=1; i<392; i++) {
           let leftC = out.features[i].geometry.coordinates[0];
           let rightC = out.features[i].geometry.coordinates[1];
-          that.threedigitaltwin._loadModel('models/mooringbit.dae', [leftC, rightC], undefined, 0.15, 3);
+          that.threedigitaltwin._loadModel('models/mooringbit.dae', [leftC, rightC], undefined, 0.07, 3);
           console.log(i);
           // console.log(leftC + " " + rightC);
         }
