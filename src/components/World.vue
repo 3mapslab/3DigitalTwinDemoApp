@@ -46,8 +46,8 @@ const terrainProperties = {
   depth: 1,
   altitude: 2,
   material: {
-    color: "rgb(248,249,250)",
-    opacity: 0.2,
+    color: "rgb(241, 243, 241)",
+    opacity: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -58,8 +58,8 @@ const buildingsProperties = {
   depth: 10,
   altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    color: "#FF0000",
-    opacity: 0.2,
+    color: "rgb(203, 210, 211)",
+    opacity: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -70,9 +70,9 @@ const roadsProperties = {
   depth: 0.01,
   altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    //color: "#000000",
-    texture: 'textures/road3.jpg',
-    opacity: 0.2,
+    color: "#6B6B6B",
+    // texture: 'textures/road3.jpg',
+    opacity: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -83,7 +83,7 @@ const gardensProperties = {
   depth: 0.01,
   altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    color: "#228B22",
+    color: "#32CD32",
     opacity: 0.2,
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -95,7 +95,7 @@ const parksProperties = {
   depth: 0.01,
   altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    color: "#696969",
+    color: "#6B6B6B",
     opacity: 0.2,
     polygonOffset: true,
     polygonOffsetFactor: -1,
