@@ -91,8 +91,8 @@ const gardensProperties = {
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
-    opacityTop: 0.2,
-    opacitySide: 0.2,
+    opacityTop: 1,
+    opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -105,8 +105,8 @@ const parksProperties = {
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
-    opacityTop: 0.2,
-    opacitySide: 0.2,
+    opacityTop: 1,
+    opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -120,11 +120,6 @@ const demoData = [
     url: "https://triedeti.pt/data_geojson/terrain.geo.json",
     props: terrainProperties,
   },
-  {
-    url: "https://triedeti.pt/data_geojson/parks.geo.json",
-    props: parksProperties,
-  },
-  
 ];
 
 const demoData2 = [
@@ -139,6 +134,10 @@ const demoData2 = [
     {
     url: "https://triedeti.pt/data_geojson/gardens.geo.json",
     props: gardensProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/parks.geo.json",
+    props: parksProperties,
   },
 ]
 
