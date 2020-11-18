@@ -211,6 +211,7 @@ export default {
       //Enable Ocean
       that.threedigitaltwin.toggleOcean(true);
       that.loadDemoData();
+
       //that.threedigitaltwin.toggle3DTile(true);
 
       //that.threedigitaltwin._loadModel("models/ponte_leca.gltf", [-8.6942530416699988, 41.18882222465502]);
