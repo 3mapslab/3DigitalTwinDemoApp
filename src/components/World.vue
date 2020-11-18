@@ -10,44 +10,43 @@
 
 <script>
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
-import Stats from 'stats.js';
-
+import Stats from "stats.js";
 
 const configs = {
-  containerId: 'world', //canvas id,
+  containerId: "world", //canvas id,
   width: 15000, // meters
   height: 15000, // meters
   zoom: {
     start: 1000,
     min: 10,
-    max: 1000
+    max: 1000,
   },
   center: {
     lng: -8.7016652234108349,
-    lat: 41.185523935676713
+    lat: 41.185523935676713,
   },
-  pitchAngle: { 
+  pitchAngle: {
     start: 0, // radians
     min: 0,
-    max: Math.PI
+    max: Math.PI,
   },
   bearingAngle: {
     start: 0, // radians
     min: 0,
-    max: Math.PI / 2
+    max: Math.PI / 2,
   },
   oceanVisible: true, // boolean,
   axisHelper: false, // boolean,
   providerMapTile: null,
   modeMapTile: null,
-}
+};
 
 const terrainProperties = {
   depth: 1,
   altitude: 2,
   material: {
-    colorTop: "rgb(241, 243, 241)",    
-    colorSide: "rgb(241, 243, 241)",
+    colorTop: "#cbd2d3",
+    colorSide: "#cbd2d3",
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -74,9 +73,9 @@ const roadsProperties = {
   depth: 0.01,
   altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    //colorTop: "#6B6B6B",
-    //colorSide: "#6B6B6B",
-    texture: 'textures/road3.jpg',
+    colorTop: "#6B6B6B",
+    colorSide: "#6B6B6B",
+    texture: "textures/road3.jpg",
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -91,8 +90,8 @@ const gardensProperties = {
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
-    opacityTop: 0.2,
-    opacitySide: 0.2,
+    opacityTop: 1,
+    opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -105,8 +104,8 @@ const parksProperties = {
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
-    opacityTop: 0.2,
-    opacitySide: 0.2,
+    opacityTop: 1,
+    opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -2,
@@ -117,30 +116,28 @@ const stats = new Stats();
 
 const demoData = [
   {
-    url: "https://triedeti.pt/data_geojson/terrain.geo.json",
+    url: "https://triedeti.pt/data_geojson/terrain_v2.geojson",
     props: terrainProperties,
   },
   {
-    url: "https://triedeti.pt/data_geojson/parks.geo.json",
+    url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
   },
-  
-];
-
-const demoData2 = [
   {
-    url: "https://triedeti.pt/data_geojson/roads.geo.json",
+    url: "https://triedeti.pt/data_geojson/gardens_v2.geojson",
+    props: gardensProperties,
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/roads_v2.geojson",
     props: roadsProperties,
   },
   {
-    url: "https://triedeti.pt/data_geojson/buildings.geo.json",
+    url: "https://triedeti.pt/data_geojson/buildings_v2.geojson",
     props: buildingsProperties,
   },
-    {
-    url: "https://triedeti.pt/data_geojson/gardens.geo.json",
-    props: gardensProperties,
-  },
-]
+];
+
+console.log(buildingsProperties);
 
 export default {
   name: "World",
@@ -154,7 +151,7 @@ export default {
       var that = this;
 
       demoData.forEach((demo) => {
-         fetch(demo.url)
+        fetch(demo.url)
           .then((response) => {
             return response.json();
           })
@@ -167,54 +164,43 @@ export default {
           });
       });
     },
-    prepareDemoData() {
-      var that = this;
-
-         demoData2.forEach((demo) => {
-         fetch(demo.url)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            that.threedigitaltwin.prepareLayer(null, data, demo.props);
-          })
-          .catch((err) => {
-            // Do something for an error here
-            console.log("Fetch Error", err);
-          });
-      });
-    },
     loadMooringBitts() {
       const url = "https://triedeti.pt/data_geojson/mooring_bitt.geo.json";
       var that = this;
       fetch(url)
-        .then(res => res.json())
-        .then((out) => { // OK, add object to data
-          for(let i=1; i<out.features.length; i++) {
+        .then((res) => res.json())
+        .then((out) => {
+          // OK, add object to data
+          for (let i = 1; i < out.features.length; i++) {
             let lng = out.features[i].geometry.coordinates[0];
             let lat = out.features[i].geometry.coordinates[1];
-            that.threedigitaltwin._loadModel('models/bollard_simple.dae', [lng, lat], undefined, 0.07, 3);
+            that.threedigitaltwin._loadModel(
+              "models/bollard_simple.dae",
+              [lng, lat],
+              undefined,
+              0.07,
+              3
+            );
           }
         })
-      .catch(err => {
-        console.log(err);      
-      });
+        .catch((err) => {
+          console.log(err);
+        });
     },
     animateStats() {
       stats.begin();
       stats.end();
-      requestAnimationFrame( this.animateStats );
+      requestAnimationFrame(this.animateStats);
     },
   },
   async mounted() {
-
     var that = this;
 
     //Init FPS counter
     stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild( stats.dom );
-    requestAnimationFrame(that.animateStats)
-    
+    document.body.appendChild(stats.dom);
+    requestAnimationFrame(that.animateStats);
+
     //Init 3DigitalTwin
     that.threedigitaltwin = new ThreeDigitalTwin(configs);
     var canvas = document.getElementById(configs.containerId);
@@ -225,16 +211,23 @@ export default {
       //Enable Ocean
       that.threedigitaltwin.toggleOcean(true);
       that.loadDemoData();
-      that.prepareDemoData();
       //that.threedigitaltwin.toggle3DTile(true);
-      
+
       //that.threedigitaltwin._loadModel("models/ponte_leca.gltf", [-8.6942530416699988, 41.18882222465502]);
-      that.threedigitaltwin._loadModel('models/ponte_leca.kmz', [-8.6942530416699988, 41.18882222465502]);
-      that.threedigitaltwin._loadModel('models/Titan.kmz', [-8.71081747271464, 41.18437848352964]);
-      that.threedigitaltwin._loadModel('models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae', [-8.702219, 41.187600])
-      that.loadMooringBitts();
+      /*that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
+        -8.6942530416699988,
+        41.18882222465502,
+      ]);
+      that.threedigitaltwin._loadModel("models/Titan.kmz", [
+        -8.71081747271464,
+        41.18437848352964,
+      ]);
+      that.threedigitaltwin._loadModel(
+        "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
+        [-8.702219, 41.1876]
+      );
+      that.loadMooringBitts();*/
     });
   },
-
 };
 </script>
