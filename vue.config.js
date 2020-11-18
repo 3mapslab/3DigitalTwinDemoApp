@@ -7,4 +7,9 @@ module.exports = {
       config.resolve.alias.set('@triedeti/threedigitaltwin', '@triedeti/threedigitaltwin-dev');
     }
   },
+  devServer: {
+    disableHostCheck: true,
+    host: 'localhost',
+    port: 8080,
+},
 }
