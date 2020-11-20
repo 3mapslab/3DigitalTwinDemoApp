@@ -118,26 +118,39 @@ const demoData = [
   {
     url: "https://triedeti.pt/data_geojson/terrain_v2.geojson",
     props: terrainProperties,
+    type: "EXTRUDE",
   },
   {
     url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
+    type: "EXTRUDE",
   },
   {
     url: "https://triedeti.pt/data_geojson/gardens_v2.geojson",
     props: gardensProperties,
+    type: "EXTRUDE",
   },
   {
     url: "https://triedeti.pt/data_geojson/roads_v2.geojson",
     props: roadsProperties,
+    type: "EXTRUDE",
   },
   {
     url: "https://triedeti.pt/data_geojson/buildings_v2.geojson",
     props: buildingsProperties,
+    type: "EXTRUDE",
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/buildings_v2.geojson",
+    props: buildingsProperties,
+    type: "EXTRUDE",
+  },
+  {
+    url: "https://triedeti.pt/data_geojson/hydro.geojson",
+    props: null,
+    type: "DEM",
   },
 ];
-
-console.log(buildingsProperties);
 
 export default {
   name: "World",
@@ -156,7 +169,7 @@ export default {
             return response.json();
           })
           .then((data) => {
-            that.threedigitaltwin.loadLayer(null, data, demo.props);
+            that.threedigitaltwin.loadLayer(null, data, demo.props, demo.type);
           })
           .catch((err) => {
             // Do something for an error here
