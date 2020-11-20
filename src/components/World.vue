@@ -226,9 +226,7 @@ export default {
       that.loadDemoData();
 
       //that.threedigitaltwin.toggle3DTile(true);
-
-      //that.threedigitaltwin._loadModel("models/ponte_leca.gltf", [-8.6942530416699988, 41.18882222465502]);
-      /*that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
+      that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
         -8.6942530416699988,
         41.18882222465502,
       ]);
@@ -240,7 +238,7 @@ export default {
         "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
         [-8.702219, 41.1876]
       );
-      that.loadMooringBitts();*/
+      that.loadMooringBitts();
     });
   },
 };
