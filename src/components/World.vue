@@ -141,11 +141,6 @@ const demoData = [
     type: "EXTRUDE",
   },
   {
-    url: "https://triedeti.pt/data_geojson/buildings_v2.geojson",
-    props: buildingsProperties,
-    type: "EXTRUDE",
-  },
-  {
     url: "https://triedeti.pt/data_geojson/hydro.geojson",
     props: null,
     type: "DEM",
