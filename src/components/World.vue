@@ -192,7 +192,8 @@ export default {
               [lng, lat],
               undefined,
               0.07,
-              3
+              3,
+              "low"
             );
           }
         })
