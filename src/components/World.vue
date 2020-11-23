@@ -218,7 +218,7 @@ export default {
     //Enable Ocean
     that.threedigitaltwin.on("oceanLoaded", () => {
       //Enable Ocean
-      that.threedigitaltwin.toggleOcean(true);
+      if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
       that.loadDemoData();
 
       //that.threedigitaltwin.toggle3DTile(true);
@@ -232,7 +232,10 @@ export default {
       ]);
       that.threedigitaltwin._loadModel(
         "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
-        [-8.702219, 41.1876]
+        [-8.702219, 41.1876],
+        undefined,
+        undefined,
+        2
       );
       that.loadMooringBitts();
     });
