@@ -61,6 +61,8 @@ const buildingsProperties = {
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
+    textureTop: "textures/roof.jpg",
+    textureSide: "textures/building1.png",
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -75,7 +77,7 @@ const roadsProperties = {
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
-    texture: "textures/road3.jpg",
+    textureTop: "textures/road3.jpg",
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
