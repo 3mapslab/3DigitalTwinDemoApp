@@ -63,6 +63,8 @@ const buildingsProperties = {
     colorSide: "#cbd2d3",
     textureTop: "textures/roof.jpg",
     textureSide: "textures/building1.png",
+    textureSizeTop: 256,
+    textureSizeSide: 256,
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -79,6 +81,8 @@ const roadsProperties = {
     colorSide: "#6B6B6B",
     textureTop: "textures/road3.jpg",
     opacityTop: 1,
+    textureSizeTop: 225,
+    textureSizeSide: 225,
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -92,6 +96,8 @@ const gardensProperties = {
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
+    textureTop: "textures/garden2.jpg",
+    textureSizeTop: 225,
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -100,6 +106,7 @@ const gardensProperties = {
   },
 };
 
+/*
 const parksProperties = {
   depth: 0.01,
   altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
@@ -113,6 +120,7 @@ const parksProperties = {
     polygonOffsetUnits: -2,
   },
 };
+*/
 
 const stats = new Stats();
 
@@ -122,11 +130,11 @@ const demoData = [
     props: terrainProperties,
     type: "EXTRUDE",
   },
-  {
+  /*{
     url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
     type: "EXTRUDE",
-  },
+  },*/
   {
     url: "https://triedeti.pt/data_geojson/gardens_v2.geojson",
     props: gardensProperties,
