@@ -35,7 +35,8 @@ const configs = {
     min: 0,
     max: Math.PI / 2,
   },
-  oceanVisible: true, // boolean,
+  oceanVisible: false, // boolean,
+  leixoesOceanVisibile: true, //boolean
   axisHelper: false, // boolean,
   providerMapTile: null,
   modeMapTile: null,
@@ -106,7 +107,6 @@ const gardensProperties = {
   },
 };
 
-/*
 const parksProperties = {
   depth: 0.01,
   altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
@@ -120,7 +120,20 @@ const parksProperties = {
     polygonOffsetUnits: -2,
   },
 };
-*/
+
+const oceanProperties = {
+  depth: 0.01,
+  altitude: 0.02,
+  material: {
+    colorTop: "#1E90FF",
+    colorSide: "#1E90FF",
+    opacityTop: 1,
+    opacitySide: 1,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -2,
+  },
+}
 
 const stats = new Stats();
 
@@ -130,11 +143,11 @@ const demoData = [
     props: terrainProperties,
     type: "EXTRUDE",
   },
-  /*{
+  {
     url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
     type: "EXTRUDE",
-  },*/
+  },
   {
     url: "https://triedeti.pt/data_geojson/gardens_v2.geojson",
     props: gardensProperties,
@@ -155,6 +168,11 @@ const demoData = [
     props: null,
     type: "DEM",
   },
+  {
+    url: "leixoes_mar.geojson",
+    props: oceanProperties,
+    type: "OCEAN",
+  }
 ];
 
 export default {
