@@ -93,7 +93,7 @@ const roadsProperties = {
 
 const gardensProperties = {
   depth: 0.01,
-  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
@@ -109,7 +109,7 @@ const gardensProperties = {
 
 const parksProperties = {
   depth: 0.01,
-  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.03 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
@@ -123,10 +123,10 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 0.01,
-  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
   material: {
-    colorTop: "#1E90FF",
-    colorSide: "#1E90FF",
+    colorTop: "#005493",
+    colorSide: "#005493",
     opacityTop: 1,
     opacitySide: 1,
     polygonOffset: true,
@@ -171,7 +171,7 @@ const demoData = [
   {
     url: "leixoes_mar.geojson",
     props: oceanProperties,
-    type: "OCEAN",
+    type: "EXTRUDE",
   }
 ];
 
@@ -268,7 +268,7 @@ export default {
       undefined,
       2
     );
-    that.loadMooringBitts();
+    //that.loadMooringBitts();
   },
 };
 </script>
