@@ -123,7 +123,7 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 0.01,
-  altitude: 0.02,
+  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#1E90FF",
     colorSide: "#1E90FF",

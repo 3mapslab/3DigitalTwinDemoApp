@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@triedeti/threedigitaltwin": "^1.0.9",
+    "@turf/centroid": "^6.0.2",
+    "@turf/helpers": "^6.1.4",
+    "@turf/turf": "^5.1.6",
     "core-js": "^3.6.5",
     "delaunator": "^4.0.1",
     "proj-geojson": "^0.2.1",
