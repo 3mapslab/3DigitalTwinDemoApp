@@ -247,26 +247,28 @@ export default {
     that.threedigitaltwin.on("oceanLoaded", () => {
       //Enable Ocean
       if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
-      that.loadDemoData();
-
-      //that.threedigitaltwin.toggle3DTile(true);
-      that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
-        -8.6942530416699988,
-        41.18882222465502,
-      ]);
-      that.threedigitaltwin._loadModel("models/Titan.kmz", [
-        -8.71081747271464,
-        41.18437848352964,
-      ]);
-      that.threedigitaltwin._loadModel(
-        "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
-        [-8.702219, 41.1876],
-        undefined,
-        undefined,
-        2
-      );
-      that.loadMooringBitts();
     });
+
+    // load geojsons
+    that.loadDemoData();
+
+    //that.threedigitaltwin.toggle3DTile(true);
+    that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
+      -8.6942530416699988,
+      41.18882222465502,
+    ]);
+    that.threedigitaltwin._loadModel("models/Titan.kmz", [
+      -8.71081747271464,
+      41.18437848352964,
+    ]);
+    that.threedigitaltwin._loadModel(
+      "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
+      [-8.702219, 41.1876],
+      undefined,
+      undefined,
+      2
+    );
+    that.loadMooringBitts();
   },
 };
 </script>
