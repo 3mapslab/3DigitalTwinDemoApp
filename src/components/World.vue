@@ -36,7 +36,7 @@ const configs = {
     max: Math.PI / 2,
   },
   oceanVisible: false, // boolean,
-  leixoesOceanVisibile: true, //boolean
+  leixoesOceanVisible: false, //boolean
   axisHelper: false, // boolean,
   providerMapTile: null,
   modeMapTile: null,
@@ -171,7 +171,7 @@ const demoData = [
   {
     url: "leixoes_mar.geojson",
     props: oceanProperties,
-    type: "EXTRUDE",
+    type: "OCEAN",
   }
 ];
 
@@ -241,33 +241,43 @@ export default {
     //Init 3DigitalTwin
     that.threedigitaltwin = new ThreeDigitalTwin(configs);
     var canvas = document.getElementById(configs.containerId);
-    that.threedigitaltwin.init(canvas, configs.axisHelper);
 
     //Enable Ocean
-    that.threedigitaltwin.on("oceanLoaded", () => {
+    that.threedigitaltwin.on("worldloaded", () => {
       //Enable Ocean
       if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
+          // load geojsons
+      that.loadDemoData();
+
+      //that.threedigitaltwin.toggle3DTile(true);
+      that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
+        -8.6942530416699988,
+        41.18882222465502,
+      ]);
+      that.threedigitaltwin._loadModel("models/Titan.kmz", [
+        -8.71081747271464,
+        41.18437848352964,
+      ]);
+      that.threedigitaltwin._loadModel(
+        "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
+        [-8.702219, 41.1876],
+        undefined,
+        undefined,
+        2
+      );
+
+      let containers = that.threedigitaltwin.loadContainers([2,2,3], [50,100,5],0.5);
+      that.threedigitaltwin.moveObjectToCoordinates(containers, -8.700553, 41.186596);
+      that.threedigitaltwin.rotateObject(containers, "y", -0.9);
+      that.threedigitaltwin.setAltitude(containers, 4);
+
     });
 
-    // load geojsons
-    that.loadDemoData();
 
-    //that.threedigitaltwin.toggle3DTile(true);
-    that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
-      -8.6942530416699988,
-      41.18882222465502,
-    ]);
-    that.threedigitaltwin._loadModel("models/Titan.kmz", [
-      -8.71081747271464,
-      41.18437848352964,
-    ]);
-    that.threedigitaltwin._loadModel(
-      "models/Forte+de+Nossa+Senhora+das+Neves.dae/f992b15e-5308-4e65-88d8-815e29936824.dae",
-      [-8.702219, 41.1876],
-      undefined,
-      undefined,
-      2
-    );
+
+    that.threedigitaltwin.init(canvas, configs.axisHelper);
+
+
     //that.loadMooringBitts();
   },
 };
