@@ -123,7 +123,7 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 0.01,
-  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.05 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -244,8 +244,9 @@ export default {
     that.threedigitaltwin.init(canvas, configs.axisHelper);
 
     //Enable Ocean
-    that.threedigitaltwin.on("oceanLoaded", () => {
+    that.threedigitaltwin.on("worldLoaded", () => {
       //Enable Ocean
+      console.log("boas mpts");
       if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
     });
 
