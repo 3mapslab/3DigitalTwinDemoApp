@@ -58,7 +58,7 @@ const terrainProperties = {
 
 const buildingsProperties = {
   depth: 10,
-  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -123,7 +123,7 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 0.01,
-  altitude: 0.05 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -131,7 +131,7 @@ const oceanProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
+    polygonOffsetUnits: 0,
   },
 }
 
