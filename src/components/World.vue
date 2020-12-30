@@ -36,7 +36,7 @@ const configs = {
     max: Math.PI / 2,
   },
   oceanVisible: false, // boolean,
-  leixoesOceanVisible: false, //boolean
+  leixoesOceanVisible: true, //boolean
   axisHelper: false, // boolean,
   providerMapTile: null,
   modeMapTile: null,
@@ -58,7 +58,7 @@ const terrainProperties = {
 
 const buildingsProperties = {
   depth: 10,
-  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -123,7 +123,7 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 0.01,
-  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -131,7 +131,7 @@ const oceanProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
+    polygonOffsetUnits: 0,
   },
 }
 
@@ -244,7 +244,9 @@ export default {
 
     //Enable Ocean
     that.threedigitaltwin.on("worldloaded", () => {
+
       //Enable Ocean
+      console.log("boas mpts");
       if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
           // load geojsons
       that.loadDemoData();
