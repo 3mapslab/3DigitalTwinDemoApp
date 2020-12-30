@@ -246,7 +246,6 @@ export default {
     that.threedigitaltwin.on("worldloaded", () => {
 
       //Enable Ocean
-      console.log("boas mpts");
       if(configs.oceanVisible==true) that.threedigitaltwin.toggleOcean(true);
           // load geojsons
       that.loadDemoData();
@@ -275,10 +274,7 @@ export default {
 
     });
 
-
-
     that.threedigitaltwin.init(canvas, configs.axisHelper);
-
 
     //that.loadMooringBitts();
   },
