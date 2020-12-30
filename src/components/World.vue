@@ -36,7 +36,7 @@ const configs = {
     max: Math.PI / 2,
   },
   oceanVisible: false, // boolean,
-  leixoesOceanVisibile: true, //boolean
+  leixoesOceanVisible: true, //boolean
   axisHelper: false, // boolean,
   providerMapTile: null,
   modeMapTile: null,
@@ -171,7 +171,7 @@ const demoData = [
   {
     url: "leixoes_mar.geojson",
     props: oceanProperties,
-    type: "EXTRUDE",
+    type: "OCEAN",
   }
 ];
 
