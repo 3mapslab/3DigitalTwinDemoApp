@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { ThreeDigitalTwin } from "@triedeti/newSrc/threedigitaltwin";
+import { Twin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
 
 const configs = {
