@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Twin } from "@triedeti/threedigitaltwin";
+import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
 
 const configs = {
@@ -239,8 +239,9 @@ export default {
     requestAnimationFrame(that.animateStats);
 
     //Init 3DigitalTwin
-    // that.threedigitaltwin = new ThreeDigitalTwin(configs);
-    // var canvas = document.getElementById(configs.containerId);
+    var canvas = document.getElementById(configs.containerId);
+    that.threedigitaltwin = new ThreeDigitalTwin(canvas, configs);
+    that.threedigitaltwin.initScene();
 
     //Enable Ocean
     /*
