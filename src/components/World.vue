@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
+import { ThreeDigitalTwin } from "@triedeti/newSrc/threedigitaltwin";
 import Stats from "stats.js";
 
 const configs = {
@@ -239,10 +239,11 @@ export default {
     requestAnimationFrame(that.animateStats);
 
     //Init 3DigitalTwin
-    that.threedigitaltwin = new ThreeDigitalTwin(configs);
-    var canvas = document.getElementById(configs.containerId);
+    // that.threedigitaltwin = new ThreeDigitalTwin(configs);
+    // var canvas = document.getElementById(configs.containerId);
 
     //Enable Ocean
+    /*
     that.threedigitaltwin.on("worldloaded", () => {
 
       //Enable Ocean
@@ -277,6 +278,7 @@ export default {
     that.threedigitaltwin.init(canvas, configs.axisHelper);
 
     //that.loadMooringBitts();
+    */
   },
 };
 </script>
