@@ -43,6 +43,7 @@ const configs = {
   fog: true,
 };
 
+/*
 const terrainProperties = {
   depth: 1,
   altitude: 2,
@@ -56,10 +57,11 @@ const terrainProperties = {
     polygonOffsetUnits: -2,
   },
 };
+*/
 
 const buildingsProperties = {
   depth: 10,
-  altitude: 0.01 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -71,10 +73,11 @@ const buildingsProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
+    polygonOffsetUnits: -8*2,
   },
 };
 
+/*
 const roadsProperties = {
   depth: 0.01,
   altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
@@ -91,10 +94,11 @@ const roadsProperties = {
     polygonOffsetUnits: -2,
   },
 };
+*/
 
 const gardensProperties = {
   depth: 0.01,
-  altitude: 0.02 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 1.01 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
@@ -104,13 +108,13 @@ const gardensProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
+    polygonOffsetUnits: -6*2,
   },
 };
 
 const parksProperties = {
   depth: 0.01,
-  altitude: 0.03 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 1.02 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
@@ -118,13 +122,13 @@ const parksProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
+    polygonOffsetUnits: -4*2,
   },
 };
 
 const oceanProperties = {
-  depth: 0.01,
-  altitude: 0 + terrainProperties.depth + terrainProperties.altitude,
+  depth: 1.03,
+  altitude: 0.99 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -132,18 +136,20 @@ const oceanProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: 0,
+    polygonOffsetUnits: -2*2,
   },
-};
+}
 
 const stats = new Stats();
 
 const demoData = [
+  /*
   {
     url: "https://triedeti.pt/data_geojson/terrain_v2.geojson",
     props: terrainProperties,
     type: "EXTRUDE",
   },
+  */
   {
     url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
@@ -154,26 +160,30 @@ const demoData = [
     props: gardensProperties,
     type: "EXTRUDE",
   },
+  /*
   {
     url: "https://triedeti.pt/data_geojson/roads_v2.geojson",
     props: roadsProperties,
     type: "EXTRUDE",
   },
+  */
   {
     url: "https://triedeti.pt/data_geojson/buildings_v2.geojson",
     props: buildingsProperties,
     type: "EXTRUDE",
   },
+  /*
   {
     url: "https://triedeti.pt/data_geojson/hydro.geojson",
     props: null,
     type: "DEM",
   },
+  */
   {
-    url: "leixoes_mar.geojson",
-    props: oceanProperties,
-    type: "OCEAN",
-  },
+      url: "leixoes_mar.geojson",
+      props: oceanProperties,
+      type: "EXTRUDE",
+    }
 ];
 
 export default {
@@ -243,6 +253,8 @@ export default {
     var canvas = document.getElementById(configs.containerId);
     that.threedigitaltwin = new ThreeDigitalTwin(canvas, configs);
     that.threedigitaltwin.initScene();
+
+    that.loadDemoData();
 
     that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
       -8.6942530416699988,
