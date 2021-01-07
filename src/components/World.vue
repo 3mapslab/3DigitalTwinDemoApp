@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { Objects } from "@triedeti/threedigitaltwin"
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
 
@@ -43,10 +44,10 @@ const configs = {
   fog: true,
 };
 
-/*
+
 const terrainProperties = {
   depth: 1,
-  altitude: 2,
+  altitude: 0,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -54,14 +55,12 @@ const terrainProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
   },
 };
-*/
 
 const buildingsProperties = {
   depth: 10,
-  altitude: 1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0.1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -73,14 +72,23 @@ const buildingsProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -8*2,
   },
+    model: "models/lowpolytreegltf.glb"
+};
+
+const treesProperties = {
+  altitude: 0.1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  material: {
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+  },
+    model: "models/lowpolytreegltf.glb"
 };
 
 /*
 const roadsProperties = {
   depth: 0.01,
-  altitude: 0.04 + terrainProperties.depth + terrainProperties.altitude,
+  altitude: 0.01 + terrainProperties.depth,
   material: {
     colorTop: "#FFFFFF",
     colorSide: "#FFFFFF",
@@ -91,14 +99,13 @@ const roadsProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2,
   },
 };
 */
 
 const gardensProperties = {
   depth: 0.01,
-  altitude: 1.01 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0.1 + terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
@@ -108,13 +115,12 @@ const gardensProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -6*2,
   },
 };
 
 const parksProperties = {
   depth: 0.01,
-  altitude: 1.02 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0.1 + terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
@@ -122,13 +128,12 @@ const parksProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -4*2,
   },
 };
 
 const oceanProperties = {
   depth: 1.03,
-  altitude: 0.99 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -136,7 +141,6 @@ const oceanProperties = {
     opacitySide: 1,
     polygonOffset: true,
     polygonOffsetFactor: -1,
-    polygonOffsetUnits: -2*2,
   },
 }
 
@@ -183,7 +187,12 @@ const demoData = [
       url: "leixoes_mar.geojson",
       props: oceanProperties,
       type: "EXTRUDE",
-    }
+  },
+  { // place trees in mooring bitts location
+    url: "https://triedeti.pt/data_geojson/mooring_bitt.geo.json", 
+    props: treesProperties,
+    type: "GLTF"
+  }
 ];
 
 export default {
@@ -252,7 +261,6 @@ export default {
     //Init 3DigitalTwin
     var canvas = document.getElementById(configs.containerId);
     that.threedigitaltwin = new ThreeDigitalTwin(canvas, configs);
-    that.threedigitaltwin.initScene();
 
     that.loadDemoData();
 
@@ -271,7 +279,7 @@ export default {
       undefined,
       2
     );
-
+    
     // that.loadMooringBitts();
   },
 };
