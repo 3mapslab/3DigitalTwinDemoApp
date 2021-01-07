@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { Objects } from "@triedeti/threedigitaltwin"
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
 
