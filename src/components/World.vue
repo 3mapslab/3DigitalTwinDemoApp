@@ -13,7 +13,6 @@ import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
 import * as THREE from "three";
 
-
 const configs = {
   containerId: "world", //canvas id,
   width: 15000, // meters
@@ -45,7 +44,6 @@ const configs = {
   fog: true,
 };
 
-
 const terrainProperties = {
   depth: 1,
   altitude: 0,
@@ -74,7 +72,7 @@ const buildingsProperties = {
     polygonOffset: true,
     polygonOffsetFactor: -1,
   },
-    model: "models/lowpolytreegltf.glb"
+  model: "models/lowpolytreegltf.glb",
 };
 
 const treesProperties = {
@@ -83,7 +81,7 @@ const treesProperties = {
     polygonOffset: true,
     polygonOffsetFactor: -1,
   },
-    model: "models/lowpolytreegltf.glb"
+  model: "models/lowpolytreegltf.glb",
 };
 
 /*
@@ -106,7 +104,9 @@ const roadsProperties = {
 
 const gardensProperties = {
   depth: 0.01,
-  altitude: 0.1 + terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude:
+    0.1 +
+    terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
@@ -121,7 +121,9 @@ const gardensProperties = {
 
 const parksProperties = {
   depth: 0.01,
-  altitude: 0.1 + terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude:
+    0.1 +
+    terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
@@ -143,7 +145,20 @@ const oceanProperties = {
     polygonOffset: true,
     polygonOffsetFactor: -1,
   },
-}
+};
+
+const containersProperties = {
+  depth: 1.03,
+  altitude: 0 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  material: {
+    colorTop: "#005493",
+    colorSide: "#005493",
+    opacityTop: 1,
+    opacitySide: 1,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+  },
+};
 
 const stats = new Stats();
 
@@ -185,15 +200,21 @@ const demoData = [
   },
   */
   {
-      url: "leixoes_mar.geojson",
-      props: oceanProperties,
-      type: "EXTRUDE",
+    url: "leixoes_mar.geojson",
+    props: oceanProperties,
+    type: "EXTRUDE",
   },
-  { // place trees in mooring bitts location
-    url: "https://triedeti.pt/data_geojson/mooring_bitt.geo.json", 
+  {
+    // place trees in mooring bitts location
+    url: "https://triedeti.pt/data_geojson/mooring_bitt.geo.json",
     props: treesProperties,
-    type: "GLTF"
-  }
+    type: "GLTF",
+  },
+  {
+    url: "containers_xyz.geojson",
+    props: containersProperties,
+    type: "CONTAINERS",
+  },
 ];
 
 export default {
@@ -246,16 +267,42 @@ export default {
         });
     },
     loadContainers() {
+      const url = "containers_xyz.geojson";
       var that = this;
+      let positions = [];
+      fetch(url)
+        .then((res) => res.json())
+        .then((out) => {
+          var boxWidth = 6.06;
+          var boxHeight = 2.6;
+          var boxDepth = 2.44;
 
-      var boxWidth = 6.06;
-      var boxHeight = 2.6;
-      var boxDepth = 2.44;
+          let geometry = new THREE.BoxBufferGeometry(
+            boxWidth,
+            boxHeight,
+            boxDepth
+          );
 
-      let geometry = new THREE.BoxBufferGeometry(boxWidth, boxHeight, boxDepth)
-      let material = new THREE.MeshStandardMaterial({color: "red"})
-      let positions = [{x:0,y:5,z:0}, {x:20, y:5, z:20}];
-      that.threedigitaltwin.loadInstancedMesh(geometry,material,positions);
+          let material = new THREE.MeshStandardMaterial({ color: "red" });
+
+          // OK, add object to data
+          for (let i = 1; i < out.features.length; i++) {
+            let lng = out.features[i].geometry.coordinates[0];
+            let lat = out.features[i].geometry.coordinates[1];
+            let z_fromGeoJson = out.features[i].properties.Z;
+            z_fromGeoJson = z_fromGeoJson*5;
+            positions.push({ x: lng, y: z_fromGeoJson, z: lat });
+          }
+
+          that.threedigitaltwin.loadInstancedMesh(
+              geometry,
+              material,
+              positions
+            );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     animateStats() {
       stats.begin();
@@ -295,7 +342,7 @@ export default {
     );
   */
     that.loadContainers();
-    
+
     // that.loadMooringBitts();
   },
 };
