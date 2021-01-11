@@ -11,6 +11,8 @@
 <script>
 import { ThreeDigitalTwin } from "@triedeti/threedigitaltwin";
 import Stats from "stats.js";
+import * as THREE from "three";
+
 
 const configs = {
   containerId: "world", //canvas id,
@@ -243,6 +245,18 @@ export default {
           console.log(err);
         });
     },
+    loadContainers() {
+      var that = this;
+
+      var boxWidth = 6.06;
+      var boxHeight = 2.6;
+      var boxDepth = 2.44;
+
+      let geometry = new THREE.BoxBufferGeometry(boxWidth, boxHeight, boxDepth)
+      let material = new THREE.MeshStandardMaterial({color: "red"})
+      let positions = [{x:0,y:5,z:0}, {x:20, y:5, z:20}];
+      that.threedigitaltwin.loadInstancedMesh(geometry,material,positions);
+    },
     animateStats() {
       stats.begin();
       stats.end();
@@ -261,6 +275,7 @@ export default {
     var canvas = document.getElementById(configs.containerId);
     that.threedigitaltwin = new ThreeDigitalTwin(canvas, configs);
 
+    /*
     that.loadDemoData();
 
     that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
@@ -278,6 +293,8 @@ export default {
       undefined,
       2
     );
+  */
+    that.loadContainers();
     
     // that.loadMooringBitts();
   },
