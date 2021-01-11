@@ -322,7 +322,6 @@ export default {
     var canvas = document.getElementById(configs.containerId);
     that.threedigitaltwin = new ThreeDigitalTwin(canvas, configs);
 
-    /*
     that.loadDemoData();
 
     that.threedigitaltwin._loadModel("models/ponte_leca.kmz", [
@@ -340,7 +339,7 @@ export default {
       undefined,
       2
     );
-  */
+
     that.loadContainers();
 
     // that.loadMooringBitts();
