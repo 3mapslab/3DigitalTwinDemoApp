@@ -136,7 +136,7 @@ const parksProperties = {
 
 const oceanProperties = {
   depth: 1.03,
-  altitude: 0 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: -1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -266,8 +266,7 @@ export default {
           console.log(err);
         });
     },
-    loadContainers() {
-      const url = "containers_xyz.geojson";
+    loadContainers(url) {
       var that = this;
       let positions = [];
       fetch(url)
@@ -283,22 +282,22 @@ export default {
             boxDepth
           );
 
-          let material = new THREE.MeshStandardMaterial({ color: "red" });
+          let material = new THREE.MeshStandardMaterial({ color: "blue" });
 
           // OK, add object to data
           for (let i = 1; i < out.features.length; i++) {
             let lng = out.features[i].geometry.coordinates[0];
             let lat = out.features[i].geometry.coordinates[1];
             let z_fromGeoJson = out.features[i].properties.Z;
-            z_fromGeoJson = z_fromGeoJson*5;
+            z_fromGeoJson = z_fromGeoJson * 5;
             positions.push({ x: lng, y: z_fromGeoJson, z: lat });
           }
 
           that.threedigitaltwin.loadInstancedMesh(
-              geometry,
-              material,
-              positions
-            );
+            geometry,
+            material,
+            positions
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -340,7 +339,7 @@ export default {
       2
     );
 
-    that.loadContainers();
+    that.loadContainers("containers_xyz.geojson");
 
     // that.loadMooringBitts();
   },
