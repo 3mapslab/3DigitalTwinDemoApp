@@ -234,7 +234,7 @@ export default {
             return response.json();
           })
           .then((data) => {
-            that.threedigitaltwin.loadLayer(null, data, demo.props, demo.type);
+            that.threedigitaltwin.loadLayer(data, demo.props, demo.type);
           })
           .catch((err) => {
             // Do something for an error here
