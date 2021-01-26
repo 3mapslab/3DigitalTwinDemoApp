@@ -45,8 +45,8 @@ const configs = {
 };
 
 const terrainProperties = {
-  depth: 0.1,
-  altitude: -0.7,
+  depth: 0.001,
+  altitude: -1.5,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -287,11 +287,13 @@ export default {
             positions.push({ x: lng, y: z_fromGeoJson, z: lat });
           }
 
-          that.threedigitaltwin.loadInstancedMesh(
+          let containers = that.threedigitaltwin.loadInstancedMesh(
             geometry,
             material,
             positions
           );
+
+          containers.addObject();
         })
         .catch((err) => {
           console.log(err);
