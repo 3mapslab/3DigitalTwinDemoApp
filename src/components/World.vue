@@ -46,7 +46,7 @@ const configs = {
 
 const terrainProperties = {
   depth: 1,
-  altitude: 0,
+  altitude: -3,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -59,7 +59,7 @@ const terrainProperties = {
 
 const buildingsProperties = {
   depth: 10,
-  altitude: 0.1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0.1,
   material: {
     colorTop: "#cbd2d3",
     colorSide: "#cbd2d3",
@@ -76,7 +76,7 @@ const buildingsProperties = {
 };
 
 const treesProperties = {
-  altitude: 0.1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0.1,
   material: {
     polygonOffset: true,
     polygonOffsetFactor: -1,
@@ -105,8 +105,7 @@ const roadsProperties = {
 const gardensProperties = {
   depth: 0.01,
   altitude:
-    0.1 +
-    terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
+    0.1,
   material: {
     colorTop: "#32CD32",
     colorSide: "#32CD32",
@@ -122,8 +121,7 @@ const gardensProperties = {
 const parksProperties = {
   depth: 0.01,
   altitude:
-    0.1 +
-    terrainProperties.depth /*+ terrainProperties.depth + terrainProperties.altitude*/,
+    0.1,
   material: {
     colorTop: "#6B6B6B",
     colorSide: "#6B6B6B",
@@ -135,8 +133,8 @@ const parksProperties = {
 };
 
 const oceanProperties = {
-  depth: 1.03,
-  altitude: -1 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  depth: 0.3,
+  altitude: 0,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -149,7 +147,7 @@ const oceanProperties = {
 
 const containersProperties = {
   depth: 1.03,
-  altitude: 0 /*+ terrainProperties.depth + terrainProperties.altitude*/,
+  altitude: 0,
   material: {
     colorTop: "#005493",
     colorSide: "#005493",
@@ -163,13 +161,11 @@ const containersProperties = {
 const stats = new Stats();
 
 const demoData = [
-  /*
   {
     url: "https://triedeti.pt/data_geojson/terrain_v2.geojson",
     props: terrainProperties,
     type: "EXTRUDE",
   },
-  */
   {
     url: "https://triedeti.pt/data_geojson/parks_v2.geojson",
     props: parksProperties,
@@ -192,13 +188,11 @@ const demoData = [
     props: buildingsProperties,
     type: "EXTRUDE",
   },
-  /*
   {
     url: "https://triedeti.pt/data_geojson/hydro.geojson",
     props: null,
     type: "DEM",
   },
-  */
   {
     url: "leixoes_mar.geojson",
     props: oceanProperties,
